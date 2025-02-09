@@ -17,6 +17,18 @@
         h1 {
             color: #ff69b4;
         }
+        .question {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -24,6 +36,19 @@
         <h1>Hello!</h1>
         <p>Welcome to this little surprise website!</p>
         <p>Hope you have a great day! 😊</p>
+        
+        <!-- Music Player -->
+        <audio controls autoplay loop>
+            <source src="your-song.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <!-- Funny Question Interaction -->
+        <div class="question">
+            <p>Which is better?</p>
+            <button onclick="alert('Good choice! 👍')">Cats</button>
+            <button onclick="alert('Also a great choice! 🐶')">Dogs</button>
+        </div>
     </div>
 </body>
 </html>
