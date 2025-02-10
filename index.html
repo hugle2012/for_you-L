@@ -1,65 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome!</title>
-    <style>
-        body {
-            background-color: #FFD1DC; /* Soft pink pastel */
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            margin-top: 50px;
-            padding: 20px;
-        }
-        h1 {
-            color: #ff69b4;
-        }
-        .question {
-            margin-top: 20px;
-            position: relative;
-        }
-        button {
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            position: absolute;
-            transition: top 0.2s, left 0.2s;
-        }
-    </style>
-    <script>
-        function moveButton(button) {
-            let newX = Math.random() * (window.innerWidth - 100);
-            let newY = Math.random() * (window.innerHeight - 50);
-            button.style.left = newX + 'px';
-            button.style.top = newY + 'px';
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Surprise</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      background-color: pink;
+      color: red;
+    }
+    button {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    button:hover {
+      background-color: darkred;
+    }
+    #funnyQuestion {
+      cursor: pointer;
+      color: purple;
+      font-size: 24px;
+    }
+    #cuteImage {
+      display: none;
+      width: 300px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hello!</h1>
-        <p>Welcome to this little surprise website!</p>
-        <p>Hope you have a great day! 😊</p>
-        
-        <!-- Music Player -->
-        <audio controls autoplay loop>
-            <source src="your-song.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-        
-        <!-- Funny Question Interaction -->
-        <div class="question">
-            <p>Which is better?</p>
-            <button onclick="alert('Good choice! 👍')" style="position: relative;">Cats</button>
-            <button onclick="moveButton(this)">Dogs</button>
-        </div>
-    </div>
+  <h1>Happy Valentine's Day, <span id="crushName">[Her Name]</span>!</h1>
+
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button onclick="showImage('image1.jpg')">Click for a Surprise!</button>
+  <button onclick="showImage('image2.jpg')">Another Surprise!</button>
+
+  <img id="cuteImage" src="" alt="Cute Image">
+
+  <h2 id="funnyQuestion" style="position: absolute;">Will you be my Valentine?</h2>
+
+  <script>
+    const question = document.getElementById('funnyQuestion');
+
+    question.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - question.offsetWidth);
+      const y = Math.random() * (window.innerHeight - question.offsetHeight);
+      question.style.left = `${x}px`;
+      question.style.top = `${y}px`;
+    });
+
+    question.addEventListener('click', () => {
+      alert('Yay! I knew you\'d say yes! ❤️');
+    });
+
+    function showImage(imageSrc) {
+      const imgElement = document.getElementById('cuteImage');
+      imgElement.src = imageSrc;
+      imgElement.style.display = 'block';
+    }
+  </script>
 </body>
 </html>
