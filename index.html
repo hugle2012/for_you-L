@@ -240,7 +240,7 @@
     function checkAnswer() {
       const selectedAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
       if (selectedAnswer && selectedAnswer.value === qnaData[currentQuestionIndex].answer) {
-        showAnnouncement(`Gòi mày đúng gòi🥱 ${qnaData[currentQuestionIndex]}`);
+        showAnnouncement(`Gòi mày đúng gòi🥱`);
         showExplanation(qnaData[currentQuestionIndex].explanation);
       } else if (selectedAnswer) {
         const wrongMessage = selectedAnswer.getAttribute('data-wrong-message');
