@@ -187,12 +187,12 @@
       { question: "Đố nhớ tao làm website này ở nhân cách nào?", choices: ["hâm", "đang hâm", "từng hâm", "sắp hâm"], answer: "hâm", prize: " tao làm phiền mỗi ngày, nhiễu rồi đâyyyy." },
       { question: "Đoán xem tao đang nghĩ gì khi gửi cho mày cái này?", choices: ["mong nó hiểu mấy cái mình viết trong lày", "ngủ", "tháo não", "nhớ cô ấy(không biết phải mày không)"], answer: "nhớ cô ấy(không biết phải mày không)", prize: "c-cái đó á, thêm câu nữa đi bật mí cho ;)" },
       { question: "Sở thích của tao(khó: tỉ lệ đoán trúng chỉ có 25%)?", choices: ["một mình", "một mình nhưng bên 1 người nữa(ai ấy nhỉ)", "thích gì cũng được miễn hết chán", "lười nên đéo thích làm gì hết (y)"], answer: "lười nên đéo thích làm gì hết (y)", prize: "người quan tâm bạn hơn bình thường, hơn nữa là..." },
-      { question: "(Câu này để trống đợi người đó viết tiếp)?", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "đừng viết 4 cái không khó lắmmm"], answer: "...", prize: "..." }
+      { question: "(Câu này để trống đợi người đó viết tiếp)?", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "..."], answer: "...", prize: "..." }
     ];
 
     const wrongAnswerMessages = [
-      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"
-    ];
+      "Xám là tao màaa, sao tao thích tao được", "", "Đỏ là của quang anh mà, nhớ kiểu gì oyy", "chưa từng nghe qua màu này luôn", "3 hơi nhiều quá, không viện kiểm soát được", "1 là ai?", "", "không phải lúc nào cũng là số 9 đâu trời", "lười mà viết được chữ lười y nguyên thì khoq phải tao", "2 chữ i thừa ời", "(quá lười để giải thích tại sao câu này sai)", "", "biết zoiii", "dễ mà ta", "chắc không?", "", "THỐI VL BỐ THỀ", "", "tuỳ lúc", "luoi", "", "đâu ra z", "chưa chắc đâu", "không...biết", "vẫn đ bit mày có hiểu khoq", "khoà khoà", "thi thoảng thôi"
+    , "mminh vui(nhưng mà cũng có lúc buồn mà)", "ai ấy nhỉ, nhớ ra được thì đây là đáp án đúng", "có lúc nào chán đâu trờiiii", "", "mụt", "haiiii", "bar", ""];
 
     question.addEventListener('mouseover', () => {
       const x = Math.random() * (window.innerWidth - question.offsetWidth);
@@ -202,7 +202,7 @@
     });
 
     question.addEventListener('click', () => {
-      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
+      showAnnouncement('Tao biết ngay mà haizzz');
     });
 
     function showImage(imageSrc) {
@@ -212,7 +212,7 @@
     }
 
     function acceptProposal() {
-      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
+      showAnnouncement('Mày nghĩ là tao cho chắc(có khi ai biết, khám phá hết website này đi 😉)');
     }
 
     function declineProposal() {
@@ -236,7 +236,7 @@
       if (currentQuestionIndex >= qnaData.length) {
         showAnnouncement("Congratulations! You've answered all the questions!");
         setTimeout(() => {
-          showPopupGif('congrats.gif', "Do you want to know his (my) thoughts about you? (VERY DANGEROUS)");
+          showPopupGif('congrats.gif', "Mày có muốn biết suy nghĩ của anh ta(tao) về mày không? (VERY DANGEROUS)");
         }, 3000);
         return;
       }
