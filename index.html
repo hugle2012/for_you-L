@@ -94,6 +94,28 @@
       display: none;
       font-size: 18px;
     }
+    #popupGif {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    #popupGif img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    #popupGif button {
+      width: 100px;
+      margin-top: 10px;
+    }
+    #popupGif p {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -129,6 +151,13 @@
 
   <div id="announcement"></div>
 
+  <div id="popupGif">
+    <img id="gifImg" src="" alt="GIF">
+    <p id="gifMessage"></p>
+    <button id="opt1Button" onclick="showNextGif('gif2.gif', 'Do you want to know more?')">Opt 1</button>
+    <button id="opt2Button" onclick="showNextGif('gif3.gif', 'Are you curious?')">Opt 2</button>
+  </div>
+
   <script>
     const question = document.getElementById('funnyQuestion');
     const yesButton = document.getElementById('yesButton');
@@ -137,6 +166,9 @@
     const startGameButton = document.getElementById('startGameButton');
     const backgroundMusic = document.getElementById('backgroundMusic');
     const announcement = document.getElementById('announcement');
+    const popupGif = document.getElementById('popupGif');
+    const gifImg = document.getElementById('gifImg');
+    const gifMessage = document.getElementById('gifMessage');
     let yesButtonSize = 20;
     let currentQuestionIndex = 0;
 
@@ -193,6 +225,9 @@
     function showNextQuestion() {
       if (currentQuestionIndex >= qnaData.length) {
         showAnnouncement("Congratulations! You've answered all the questions!");
+        setTimeout(() => {
+          showPopupGif('congrats.gif', "Do you want to know his (my) thoughts about you? (VERY DANGEROUS)");
+        }, 3000);
         return;
       }
 
@@ -226,6 +261,17 @@
       setTimeout(() => {
         announcement.style.display = 'none';
       }, 3000);
+    }
+
+    function showPopupGif(gifSrc, message) {
+      gifImg.src = gifSrc;
+      gifMessage.textContent = message;
+      popupGif.style.display = 'block';
+    }
+
+    function showNextGif(gifSrc, message) {
+      gifImg.src = gifSrc;
+      gifMessage.textContent = message;
     }
   </script>
 </body>
