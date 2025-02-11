@@ -119,6 +119,18 @@
     #popupGif p {
       margin-top: 10px;
     }
+    #explanation {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: none;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
@@ -152,6 +164,7 @@
   </div>
 
   <div id="announcement"></div>
+  <div id="explanation"></div>
 
   <div id="popupGif">
     <img id="gifImg" src="" alt="GIF">
@@ -168,30 +181,33 @@
     const startGameButton = document.getElementById('startGameButton');
     const backgroundMusic = document.getElementById('backgroundMusic');
     const announcement = document.getElementById('announcement');
+    const explanation = document.getElementById('explanation');
     const popupGif = document.getElementById('popupGif');
     const gifImg = document.getElementById('gifImg');
     const gifMessage = document.getElementById('gifMessage');
     let yesButtonSize = 20;
     let currentQuestionIndex = 0;
     let isPlaying = true;
+    let explanationShown = false;
+    let noCount = 0;
 
     const songs = ['mo.mp3', 'song2.mp3', 'song3.mp3', 'song4.mp3'];
     let currentSongIndex = 0;
 
     const qnaData = [
-      { question: "Tao thích màu gì?", choices: ["Xám", "#ffd1dc", "Đỏ", "Xanh dương"], answer: "#ffd1dc", prize: "câu 2 ;)" },
-      { question: "Tao nói rằng tao có mấy nhân cách?", choices: ["3", "1", "2", "9"], answer: "2", prize: "*Ờmmm* câu 3 đi chứ còn gì nữa." },
-      { question: "Tại sao tao lại vô tâm?", choices: ["lười", "lườii nhưng mà có 2 chữ i", "lu...(quá lười để viết hết chữ 'lười')", ""], answer: "", prize: " biết thêm về tao(nếu muốn), next câu đi..." },
-      { question: "Có nhớ là tao nói rằng tao từng ấn tượng ở mày điều gì không?", choices: ["mày xinh", "trông không dễ đoán như mọi người nghĩ", "vì tao thích", "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa"], answer: "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa", prize: " thấy tao mỗi ngày, thích thì nhích câu 5 đi" },
-      { question: "Tao từng bảo tao ghét ăn gì?", choices: ["nước mắm nhà Niêm", "bún (y)", "mày", "*lười quá cho viết tạm như này nha*"], answer: "bún (y)", prize: " nói chuyện với tao mỗi khi mày muốn, thấy keng rồi thì chuyển câu 6 đê. " },
-      { question: "Đố nhớ tao làm website này ở nhân cách nào?", choices: ["hâm", "đang hâm", "từng hâm", "sắp hâm"], answer: "hâm", prize: " tao làm phiền mỗi ngày, nhiễu rồi đâyyyy." },
-      { question: "Đoán xem tao đang nghĩ gì khi gửi cho mày cái này?", choices: ["mong nó hiểu mấy cái mình viết trong lày", "ngủ", "tháo não", "nhớ cô ấy(không biết phải mày không)"], answer: "nhớ cô ấy(không biết phải mày không)", prize: "c-cái đó á, thêm câu nữa đi bật mí cho ;)" },
-      { question: "Sở thích của tao(khó: tỉ lệ đoán trúng chỉ có 25%)?", choices: ["một mình", "một mình nhưng bên 1 người nữa(ai ấy nhỉ)", "thích gì cũng được miễn hết chán", "lười nên đéo thích làm gì hết (y)"], answer: "lười nên đéo thích làm gì hết (y)", prize: "người quan tâm bạn hơn bình thường, hơn nữa là..." },
-      { question: "(Câu này để trống đợi người đó viết tiếp)?", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "..."], answer: "...", prize: "..." }
+      { question: "Tao thích màu gì?", choices: ["Xám", "#ffd1dc", "Đỏ", "Xanh dương"], answer: "#ffd1dc", prize: "câu 2 ;)", explanation: "Tao thích màu hồng pastel!" },
+      { question: "Tao nói rằng tao có mấy nhân cách?", choices: ["3", "1", "2", "9"], answer: "2", prize: "*Ờmmm* câu 3 đi chứ còn gì nữa.", explanation: "Tao đã nói rằng tao có 2 nhân cách." },
+      { question: "Tại sao tao lại vô tâm?", choices: ["lười", "lườii nhưng mà có 2 chữ i", "lu...(quá lười để viết hết chữ 'lười')", ""], answer: "", prize: " biết thêm về tao(nếu muốn), next câu đi...", explanation: "Tao vô tâm vì tao lười." },
+      { question: "Có nhớ là tao nói rằng tao từng ấn tượng ở mày điều gì không?", choices: ["mày xinh", "trông không dễ đoán như mọi người nghĩ", "vì tao thích", "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa"], answer: "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa", prize: " thấy tao mỗi ngày, thích thì nhích câu 5 đi", explanation: "Tao ấn tượng ở mày vì trông mày không dễ đoán như mọi người nghĩ." },
+      { question: "Tao từng bảo tao ghét ăn gì?", choices: ["nước mắm nhà Niêm", "bún (y)", "mày", "*lười quá cho viết tạm như này nha*"], answer: "bún (y)", prize: " nói chuyện với tao mỗi khi mày muốn, thấy keng rồi thì chuyển câu 6 đê. ", explanation: "Tao ghét ăn bún." },
+      { question: "Đố nhớ tao làm website này ở nhân cách nào?", choices: ["hâm", "đang hâm", "từng hâm", "sắp hâm"], answer: "hâm", prize: " tao làm phiền mỗi ngày, nhiễu rồi đâyyyy.", explanation: "Tao làm website này ở nhân cách hâm." },
+      { question: "Đoán xem tao đang nghĩ gì khi gửi cho mày cái này?", choices: ["mong nó hiểu mấy cái mình viết trong lày", "ngủ", "tháo não", "nhớ cô ấy(không biết phải mày không)"], answer: "nhớ cô ấy(không biết phải mày không)", prize: "c-cái đó á, thêm câu nữa đi bật mí cho ;)", explanation: "Tao đang nhớ cô ấy (không biết phải mày không)." },
+      { question: "Sở thích của tao(khó: tỉ lệ đoán trúng chỉ có 25%)?", choices: ["một mình", "một mình nhưng bên 1 người nữa(ai ấy nhỉ)", "thích gì cũng được miễn hết chán", "lười nên đéo thích làm gì hết (y)"], answer: "lười nên đéo thích làm gì hết (y)", prize: "người quan tâm bạn hơn bình thường, hơn nữa là...", explanation: "Tao lười nên đéo thích làm gì hết (y)." },
+      { question: "(Câu này để trống đợi người đó viết tiếp)?", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "..."], answer: "...", prize: "...", explanation: "Câu này để trống đợi người đó viết tiếp." }
     ];
 
     const wrongAnswerMessages = [
-      "Xám là tao màaa, sao tao thích tao được", "", "Đỏ là của quang anh mà, nhớ kiểu gì oyy", "chưa từng nghe qua màu này luôn", "3 hơi nhiều quá, không viện kiểm soát được", "1 là ai?", "", "không phải lúc nào cũng là số 9 đâu trời", "lười mà viết được chữ lười y nguyên thì khoq phải tao", "2 chữ i thừa ời", "(quá lười để giải thích tại sao câu này sai)", "", "biết zoiii", "dễ mà ta", "chắc không?", "", "THỐI VL BỐ THỀ", "", "tuỳ lúc", "luoi", "", "đâu ra z", "chưa chắc đâu", "không...biết", "vẫn đ bit mày có hiểu khoq", "khoà khoà", "thi thoảng thôi"
+            "Xám là tao màaa, sao tao thích tao được", "", "Đỏ là của quang anh mà, nhớ kiểu gì oyy", "chưa từng nghe qua màu này luôn", "3 hơi nhiều quá, không viện kiểm soát được", "1 là ai?", "", "không phải lúc nào cũng là số 9 đâu trời", "lười mà viết được chữ lười y nguyên thì khoq phải tao", "2 chữ i thừa ời", "(quá lười để giải thích tại sao câu này sai)", "", "biết zoiii", "dễ mà ta", "chắc không?", "", "THỐI VL BỐ THỀ", "", "tuỳ lúc", "luoi", "", "đâu ra z", "chưa chắc đâu", "không...biết", "vẫn đ bit mày có hiểu khoq", "khoà khoà", "thi thoảng thôi"
     , "mminh vui(nhưng mà cũng có lúc buồn mà)", "ai ấy nhỉ, nhớ ra được thì đây là đáp án đúng", "có lúc nào chán đâu trờiiii", "", "mụt", "haiiii", "bar", ""];
 
     question.addEventListener('mouseover', () => {
@@ -253,11 +269,38 @@
       const selectedAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
       if (selectedAnswer && selectedAnswer.value === qnaData[currentQuestionIndex].answer) {
         showAnnouncement(`Correct! You win: ${qnaData[currentQuestionIndex].prize}`);
-        currentQuestionIndex++;
-        showNextQuestion();
+        showExplanation(qnaData[currentQuestionIndex].explanation);
       } else if (selectedAnswer) {
         const wrongMessage = selectedAnswer.getAttribute('data-wrong-message');
         showAnnouncement(wrongMessage);
+      }
+    }
+
+    function showExplanation(explanationText) {
+      explanation.innerHTML = `Mày có muốn biết tại sao câu đó lại có đáp án vậy khônggggg?<br><button onclick="confirmExplanation('${explanationText}')">Có</button> <button onclick="denyExplanation()">Không</button>`;
+      explanation.style.display = 'block';
+    }
+
+    function confirmExplanation(explanationText) {
+      explanation.innerHTML = explanationText;
+      setTimeout(() => {
+        explanation.style.display = 'none';
+        currentQuestionIndex++;
+        showNextQuestion();
+      }, 3000);
+    }
+
+    function denyExplanation() {
+      noCount++;
+      if (noCount > 2) {
+        explanation.innerHTML = "Mày phải biết mới cho đi tiếp cơ Ơ";
+        setTimeout(() => {
+          noCount = 0;
+          confirmExplanation(qnaData[currentQuestionIndex].explanation);
+        }, 3000);
+      } else {
+        explanation.innerHTML = "Mày muốn biết mà phải không";
+        setTimeout(showExplanation.bind(null, qnaData[currentQuestionIndex].explanation), 3000);
       }
     }
 
