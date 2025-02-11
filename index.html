@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hepi valentine</title>
+  <title>Valentine's Surprise</title>
   <style>
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -20,7 +20,7 @@
       border-radius: 5px;
       cursor: pointer;
       margin: 10px;
-      transition: background-color 0.15s, transform 0.15s;
+      transition: background-color 0.3s, transform 0.3s;
     }
     button:hover {
       background-color: #ffb6c1;
@@ -179,15 +179,22 @@
     let currentSongIndex = 0;
 
     const qnaData = [
-      { question: "What is my favorite color?", choices: ["Pink", "Blue", "Red", "Green"], answer: "Pink", prize: "A kiss 💋" },
-      { question: "Where did we first meet?", choices: ["At the park", "At the mall", "At the cinema", "At the cafe"], answer: "At the park", prize: "A hug 🤗" },
-      { question: "What is my middle name?", choices: ["Marie", "Anne", "Grace", "Lynn"], answer: "Marie", prize: "A smile 😊" },
-      { question: "What is my favorite movie?", choices: ["Titanic", "Inception", "Avatar", "The Notebook"], answer: "Titanic", prize: "Dinner date 🍽️" },
-      { question: "What is my favorite food?", choices: ["Pizza", "Sushi", "Burger", "Pasta"], answer: "Pizza", prize: "A dance 💃" },
-      { question: "What is our anniversary date?", choices: ["February 14", "March 1", "April 22", "June 30"], answer: "February 14", prize: "A night out 🌃" },
-      { question: "What is my pet's name?", choices: ["Buddy", "Max", "Charlie", "Bella"], answer: "Buddy", prize: "A surprise gift 🎁" },
-      { question: "What is my favorite hobby?", choices: ["Reading", "Painting", "Traveling", "Cooking"], answer: "Reading", prize: "A sweet treat 🍬" },
-      { question: "What is my dream destination?", choices: ["Paris", "New York", "Tokyo", "Sydney"], answer: "Paris", prize: "A weekend getaway 🏖️" }
+      { question: "What is my favorite color?", choices: ["Grey", "Blue", "Red", "Green"], answer: "Pink", prize: "câu 2 ;)" },
+      { question: "Where did we first meet?", choices: ["At the park", "At the mall", "At the cinema", "At the cafe"], answer: "At the park", prize: "*Ờmmm* câu 3 đi chứ còn gì nữa." },
+      { question: "What is my middle name?", choices: ["Marie", "Anne", "Grace", "Lynn"], answer: "Marie", prize: " biết thêm về tao(nếu muốn), next câu đi..." },
+      { question: "What is my favorite movie?", choices: ["Titanic", "Inception", "Avatar", "The Notebook"], answer: "Titanic", prize: " thấy tao mỗi ngày, thích thì nhích câu 5 đi" },
+      { question: "What is my favorite food?", choices: ["Pizza", "Sushi", "Burger", "Pasta"], answer: "Pizza", prize: " nói chuyện với tao mỗi khi mày muốn, thấy keng rồi thì chuyển câu 6 đê. " },
+      { question: "What is our anniversary date?", choices: ["February 14", "March 1", "April 22", "June 30"], answer: "February 14", prize: " tao làm phiền mỗi ngày, nhiễu rồi đâyyyy." },
+      { question: "What is my pet's name?", choices: ["Buddy", "Max", "Charlie", "Bella"], answer: "Buddy", prize: "c-cái đó á, thêm câu nữa đi bật mí cho ;)" },
+      { question: "What is my favorite hobby?", choices: ["Reading", "Painting", "Traveling", "Cooking"], answer: "Reading", prize: "người quan tâm bạn hơn bình thường, hơn nữa là..." },
+      { question: "What is my dream destination?", choices: ["Paris", "New York", "Tokyo", "Sydney"], answer: "Paris", prize: "..." }
+    ];
+
+    const wrongAnswers = [
+      "Ôi, nhớ gì đâu...",
+      "...sai zoi",
+      "Thật luôn, có chắc là nhớ không zay",
+      "Thử thêm lần nữa có khi đúng đó"
     ];
 
     question.addEventListener('mouseover', () => {
@@ -198,7 +205,7 @@
     });
 
     question.addEventListener('click', () => {
-      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
+      showAnnouncement('Nghĩ gì vậy trời, vui thôi đừng vui quá nha.');
     });
 
     function showImage(imageSrc) {
@@ -208,7 +215,7 @@
     }
 
     function acceptProposal() {
-      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
+      showAnnouncement('Nói thế thôi, chứ mà cho à 🥱');
     }
 
     function declineProposal() {
@@ -252,7 +259,8 @@
         currentQuestionIndex++;
         showNextQuestion();
       } else {
-        showAnnouncement('Oops! That\'s not correct. Try again!');
+        const randomIndex = Math.floor(Math.random() * wrongAnswers.length);
+        showAnnouncement(wrongAnswers[randomIndex]);
       }
     }
 
