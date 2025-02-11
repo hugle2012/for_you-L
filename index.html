@@ -203,7 +203,7 @@
       { question: "Đố nhớ tao làm website này ở nhân cách nào?", choices: ["hâm", "đang hâm", "từng hâm", "sắp hâm"], answer: "hâm", prize: " tao làm phiền mỗi ngày, nhiễu rồi đâyyyy.", explanation: "Tao làm website này ở nhân cách hâm." },
       { question: "Đoán xem tao đang nghĩ gì khi gửi cho mày cái này?", choices: ["mong nó hiểu mấy cái mình viết trong lày", "ngủ", "tháo não", "nhớ cô ấy(không biết phải mày không)"], answer: "nhớ cô ấy(không biết phải mày không)", prize: "c-cái đó á, thêm câu nữa đi bật mí cho ;)", explanation: "Tao đang nhớ cô ấy (không biết phải mày không)." },
       { question: "Sở thích của tao(khó: tỉ lệ đoán trúng chỉ có 25%)?", choices: ["một mình", "một mình nhưng bên 1 người nữa(ai ấy nhỉ)", "thích gì cũng được miễn hết chán", "lười nên đéo thích làm gì hết (y)"], answer: "lười nên đéo thích làm gì hết (y)", prize: "người quan tâm bạn hơn bình thường, hơn nữa là...", explanation: "Tao lười nên đéo thích làm gì hết (y)." },
-      { question: "(Câu này để trống đợi người đó viết tiếp)?", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "..."], answer: "...", prize: "...", explanation: "Câu này để trống đợi người đó viết tiếp." }
+      { question: "(Câu này để trống đợi người đó viết tiếp)", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "..."], answer: "...", prize: "...", explanation: "Câu này để trống đợi người đó viết tiếp." }
     ];
 
     const wrongAnswerMessages = [
@@ -250,7 +250,7 @@
 
     function showNextQuestion() {
       if (currentQuestionIndex >= qnaData.length) {
-        showAnnouncement("Congratulations! You've answered all the questions!");
+        showAnnouncement("Giỏi rồi, trả lời như hiểu nhau lắm rồi, nhưng mà...");
         setTimeout(() => {
           showPopupGif('congrats.gif', "Mày có muốn biết suy nghĩ của anh ta(tao) về mày không? (VERY DANGEROUS)");
         }, 3000);
