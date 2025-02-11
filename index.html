@@ -39,13 +39,37 @@
     #noButton {
       background-color: darkred;
     }
+    #qnaGame {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #qnaGame h3 {
+      margin-top: 0;
+    }
+    #qnaGame ul {
+      list-style: none;
+      padding: 0;
+    }
+    #qnaGame li {
+      margin-bottom: 10px;
+    }
+    #qnaGame button {
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <h1>Happy Valentine's Day, <span id="crushName">[Her Name]</span>!</h1>
 
   <audio autoplay loop>
-    <source src="music.mp3" type="audio/mpeg">
+    <source src="mo.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
@@ -58,11 +82,30 @@
   <button id="yesButton" onclick="acceptProposal()">Yes</button>
   <button id="noButton" onclick="declineProposal()">No</button>
 
+  <div id="qnaGame">
+    <h3>Mini Q&A Game</h3>
+    <ul id="qnaList"></ul>
+    <button onclick="startQnAGame()">Start Game</button>
+  </div>
+
   <script>
     const question = document.getElementById('funnyQuestion');
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
+    const qnaList = document.getElementById('qnaList');
     let yesButtonSize = 20;
+
+    const qnaData = [
+      { question: "What is my favorite color?", answer: "Pink", prize: "A kiss 💋" },
+      { question: "Where did we first meet?", answer: "At the park", prize: "A hug 🤗" },
+      { question: "What is my middle name?", answer: "Marie", prize: "A smile 😊" },
+      { question: "What is my favorite movie?", answer: "Titanic", prize: "Dinner date 🍽️" },
+      { question: "What is my favorite food?", answer: "Pizza", prize: "A dance 💃" },
+      { question: "What is our anniversary date?", answer: "February 14", prize: "A night out 🌃" },
+      { question: "What is my pet's name?", answer: "Buddy", prize: "A surprise gift 🎁" },
+      { question: "What is my favorite hobby?", answer: "Reading", prize: "A sweet treat 🍬" },
+      { question: "What is my dream destination?", answer: "Paris", prize: "A weekend getaway 🏖️" }
+    ];
 
     question.addEventListener('mouseover', () => {
       const x = Math.random() * (window.innerWidth - question.offsetWidth);
@@ -94,6 +137,24 @@
       yesButton.style.position = 'absolute';
       yesButton.style.left = `${x}px`;
       yesButton.style.top = `${y}px`;
+    }
+
+    function startQnAGame() {
+      qnaList.innerHTML = '';
+      qnaData.forEach((qna, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>Q${index + 1}:</strong> ${qna.question} <br> <input type="text" id="answer${index}" placeholder="Your answer here"><br> <button onclick="checkAnswer(${index})">Submit</button>`;
+        qnaList.appendChild(li);
+      });
+    }
+
+    function checkAnswer(index) {
+      const userAnswer = document.getElementById(`answer${index}`).value.trim();
+      if (userAnswer.toLowerCase() === qnaData[index].answer.toLowerCase()) {
+        alert(`Correct! You win: ${qnaData[index].prize}`);
+      } else {
+        alert('Oops! That\'s not correct. Try again!');
+      }
     }
   </script>
 </body>
