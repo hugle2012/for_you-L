@@ -85,6 +85,18 @@
       width: 100px;
       margin: 5px;
     }
+    #musicControls input[type="range"] {
+      width: 100%;
+      margin: 10px 0;
+    }
+    #musicControls .controls {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    #musicControls .controls button {
+      width: 50px;
+    }
     #announcement {
       position: fixed;
       bottom: 10px;
@@ -158,9 +170,13 @@
 
   <div id="musicControls">
     <h3>Music Playlist</h3>
-    <button onclick="previousSong()">Previous</button>
-    <button onclick="playPauseMusic()">Play/Pause</button>
-    <button onclick="nextSong()">Next</button>
+    <div class="controls">
+      <button onclick="previousSong()">&#9664;&#9664;</button>
+      <button onclick="playPauseMusic()">&#9654;/&#10074;&#10074;</button>
+      <button onclick="nextSong()">&#9654;&#9654;</button>
+      <button onclick="shuffleSongs()">&#128256;</button>
+    </div>
+    <input type="range" id="seekBar" value="0" max="100" step="1" oninput="seekMusic()">
   </div>
 
   <div id="announcement"></div>
@@ -185,9 +201,11 @@
     const popupGif = document.getElementById('popupGif');
     const gifImg = document.getElementById('gifImg');
     const gifMessage = document.getElementById('gifMessage');
+    const seekBar = document.getElementById('seekBar');
     let yesButtonSize = 20;
     let currentQuestionIndex = 0;
     let isPlaying = true;
+    let isShuffling = false;
     let explanationShown = false;
     let noCount = 0;
 
@@ -314,7 +332,11 @@
     }
 
     function nextSong() {
-      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      if (isShuffling) {
+        currentSongIndex = Math.floor(Math.random() * songs.length);
+      } else {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+      }
       backgroundMusic.src = songs[currentSongIndex];
       backgroundMusic.play();
       isPlaying = true;
@@ -327,24 +349,23 @@
       isPlaying = true;
     }
 
+    function shuffleSongs() {
+      isShuffling = !isShuffling;
+    }
+
+    function seekMusic() {
+      const seekTo = backgroundMusic.duration * (seekBar.value / 100);
+      backgroundMusic.currentTime = seekTo;
+    }
+
+    backgroundMusic.addEventListener('timeupdate', () => {
+      seekBar.value = (backgroundMusic.currentTime / backgroundMusic.duration) * 100;
+    });
+
     function showAnnouncement(message) {
       announcement.textContent = message;
       announcement.style.display = 'block';
       setTimeout(() => {
-        announcement.style.display = 'none';
-      }, 3000);
-    }
-
-    function showPopupGif(gifSrc, message) {
-      gifImg.src = gifSrc;
-      gifMessage.textContent = message;
-      popupGif.style.display = 'block';
-    }
-
-    function showNextGif(gifSrc, message) {
-      gifImg.src = gifSrc;
-      gifMessage.textContent = message;
-    }
-  </script>
-</body>
-</html>
+            announcement.style.display = 'none';
+          }, 3000);
+        }
