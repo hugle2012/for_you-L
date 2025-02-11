@@ -13,16 +13,18 @@
       color: red;
     }
     button {
-      background-color: red;
+      background-color: #fc82de;
       color: white;
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       margin: 10px;
+      transition: background-color 0.3s, transform 0.3s;
     }
     button:hover {
-      background-color: darkred;
+      background-color: #ffb6c1;
+      transform: scale(1.1);
     }
     #funnyQuestion {
       cursor: pointer;
@@ -35,16 +37,16 @@
       margin-top: 20px;
     }
     #yesButton {
-      background-color: green;
+      background-color: #fc82de;
     }
     #noButton {
-      background-color: darkred;
+      background-color: #fc82de;
     }
     #qnaGame {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
       border: 1px solid #ccc;
       padding: 20px;
       border-radius: 10px;
@@ -63,12 +65,13 @@
     }
     #qnaGame button {
       width: 100%;
+      margin-top: 10px;
     }
     #musicControls {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
       border: 1px solid #ccc;
       padding: 20px;
       border-radius: 10px;
@@ -100,8 +103,8 @@
 
   <div id="qnaGame">
     <h3>Mini Q&A Game</h3>
-    <ul id="qnaList"></ul>
-    <button onclick="startQnAGame()">Start Game</button>
+    <div id="questionContainer"></div>
+    <button id="startGameButton" onclick="startQnAGame()">Start Game</button>
   </div>
 
   <div id="musicControls">
@@ -116,9 +119,11 @@
     const question = document.getElementById('funnyQuestion');
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
-    const qnaList = document.getElementById('qnaList');
+    const questionContainer = document.getElementById('questionContainer');
+    const startGameButton = document.getElementById('startGameButton');
     const backgroundMusic = document.getElementById('backgroundMusic');
     let yesButtonSize = 20;
+    let currentQuestionIndex = 0;
 
     const qnaData = [
       { question: "What is my favorite color?", choices: ["Pink", "Blue", "Red", "Green"], answer: "Pink", prize: "A kiss 💋" },
@@ -165,22 +170,31 @@
     }
 
     function startQnAGame() {
-      qnaList.innerHTML = '';
-      qnaData.forEach((qna, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>Q${index + 1}:</strong> ${qna.question} <br>` +
-                       qna.choices.map(choice => 
-                         `<input type="radio" name="q${index}" value="${choice}"> ${choice}<br>`
-                       ).join('') +
-                       `<button onclick="checkAnswer(${index})">Submit</button>`;
-        qnaList.appendChild(li);
-      });
+      startGameButton.style.display = 'none';
+      currentQuestionIndex = 0;
+      showNextQuestion();
     }
 
-    function checkAnswer(index) {
-      const selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`);
-      if (selectedAnswer && selectedAnswer.value === qnaData[index].answer) {
-        alert(`Correct! You win: ${qnaData[index].prize}`);
+    function showNextQuestion() {
+      if (currentQuestionIndex >= qnaData.length) {
+        alert("Congratulations! You've answered all the questions!");
+        return;
+      }
+
+      const qna = qnaData[currentQuestionIndex];
+      questionContainer.innerHTML = `<strong>Q${currentQuestionIndex + 1}:</strong> ${qna.question} <br>` +
+                                    qna.choices.map(choice => 
+                                      `<input type="radio" name="q${currentQuestionIndex}" value="${choice}"> ${choice}<br>`
+                                    ).join('') +
+                                    `<button onclick="checkAnswer()">Submit</button>`;
+    }
+
+    function checkAnswer() {
+      const selectedAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
+      if (selectedAnswer && selectedAnswer.value === qnaData[currentQuestionIndex].answer) {
+        alert(`Correct! You win: ${qnaData[currentQuestionIndex].prize}`);
+        currentQuestionIndex++;
+        showNextQuestion();
       } else {
         alert('Oops! That\'s not correct. Try again!');
       }
