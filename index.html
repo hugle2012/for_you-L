@@ -77,10 +77,13 @@
       border-radius: 10px;
       width: 300px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     #musicControls button {
-      width: 100%;
-      margin-top: 10px;
+      width: 100px;
+      margin: 5px;
     }
     #announcement {
       position: fixed;
@@ -143,10 +146,9 @@
 
   <div id="musicControls">
     <h3>Music Playlist</h3>
-    <button onclick="changeMusic('mo.mp3')">mo</button>
-    <button onclick="changeMusic('song2.mp3')">Song 2</button>
-    <button onclick="changeMusic('song3.mp3')">Song 3</button>
-    <button onclick="changeMusic('song4.mp3')">Song 4</button>
+    <button onclick="previousSong()">Previous</button>
+    <button onclick="playPauseMusic()">Play/Pause</button>
+    <button onclick="nextSong()">Next</button>
   </div>
 
   <div id="announcement"></div>
@@ -171,6 +173,10 @@
     const gifMessage = document.getElementById('gifMessage');
     let yesButtonSize = 20;
     let currentQuestionIndex = 0;
+    let isPlaying = true;
+
+    const songs = ['mo.mp3', 'song2.mp3', 'song3.mp3', 'song4.mp3'];
+    let currentSongIndex = 0;
 
     const qnaData = [
       { question: "What is my favorite color?", choices: ["Pink", "Blue", "Red", "Green"], answer: "Pink", prize: "A kiss 💋" },
@@ -250,9 +256,27 @@
       }
     }
 
-    function changeMusic(song) {
-      backgroundMusic.src = song;
+    function playPauseMusic() {
+      if (isPlaying) {
+        backgroundMusic.pause();
+      } else {
+        backgroundMusic.play();
+      }
+      isPlaying = !isPlaying;
+    }
+
+    function nextSong() {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      backgroundMusic.src = songs[currentSongIndex];
       backgroundMusic.play();
+      isPlaying = true;
+    }
+
+    function previousSong() {
+      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+      backgroundMusic.src = songs[currentSongIndex];
+      backgroundMusic.play();
+      isPlaying = true;
     }
 
     function showAnnouncement(message) {
