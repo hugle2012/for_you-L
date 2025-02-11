@@ -67,24 +67,6 @@
       width: 100%;
       margin-top: 10px;
     }
-    #musicControls {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #musicControls button {
-      width: 100px;
-      margin: 5px;
-    }
     #announcement {
       position: fixed;
       bottom: 10px;
@@ -156,13 +138,6 @@
     <button id="startGameButton" onclick="startQnAGame()">Start Game</button>
   </div>
 
-  <div id="musicControls">
-    <h3>Music Playlist</h3>
-    <button onclick="previousSong()">Previous</button>
-    <button onclick="playPauseMusic()">Play/Pause</button>
-    <button onclick="nextSong()">Next</button>
-  </div>
-
   <div id="announcement"></div>
   <div id="explanation"></div>
 
@@ -190,9 +165,6 @@
     let isPlaying = true;
     let explanationShown = false;
     let noCount = 0;
-
-    const songs = ['mo.mp3', 'song2.mp3', 'song3.mp3', 'song4.mp3'];
-    let currentSongIndex = 0;
 
     const qnaData = [
       { question: "Tao thích màu gì?", choices: ["Xám", "#ffd1dc", "Đỏ", "Xanh dương"], answer: "#ffd1dc", prize: "câu 2 ;)", explanation: "Tao thích màu hồng pastel!" },
@@ -302,29 +274,6 @@
         explanation.innerHTML = "Mày muốn biết mà phải không";
         setTimeout(showExplanation.bind(null, qnaData[currentQuestionIndex].explanation), 3000);
       }
-    }
-
-    function playPauseMusic() {
-      if (isPlaying) {
-        backgroundMusic.pause();
-      } else {
-        backgroundMusic.play();
-      }
-      isPlaying = !isPlaying;
-    }
-
-    function nextSong() {
-      currentSongIndex = (currentSongIndex + 1) % songs.length;
-      backgroundMusic.src = songs[currentSongIndex];
-      backgroundMusic.play();
-      isPlaying = true;
-    }
-
-    function previousSong() {
-      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-      backgroundMusic.src = songs[currentSongIndex];
-      backgroundMusic.play();
-      isPlaying = true;
     }
 
     function showAnnouncement(message) {
