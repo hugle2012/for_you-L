@@ -33,6 +33,12 @@
       width: 300px;
       margin-top: 20px;
     }
+    #yesButton {
+      background-color: green;
+    }
+    #noButton {
+      background-color: darkred;
+    }
   </style>
 </head>
 <body>
@@ -49,9 +55,14 @@
   <img id="cuteImage" src="" alt="Cute Image">
 
   <h2 id="funnyQuestion" style="position: absolute;">Will you be my Valentine?</h2>
+  <button id="yesButton" onclick="acceptProposal()">Yes</button>
+  <button id="noButton" onclick="declineProposal()">No</button>
 
   <script>
     const question = document.getElementById('funnyQuestion');
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    let yesButtonSize = 20;
 
     question.addEventListener('mouseover', () => {
       const x = Math.random() * (window.innerWidth - question.offsetWidth);
@@ -68,6 +79,21 @@
       const imgElement = document.getElementById('cuteImage');
       imgElement.src = imageSrc;
       imgElement.style.display = 'block';
+    }
+
+    function acceptProposal() {
+      alert('Yay! I knew you\'d say yes! ❤️');
+    }
+
+    function declineProposal() {
+      yesButtonSize += 10;
+      yesButton.style.padding = `${yesButtonSize}px`;
+      yesButton.style.transform = `scale(${yesButtonSize / 20})`;
+      const x = Math.random() * (window.innerWidth - yesButton.offsetWidth);
+      const y = Math.random() * (window.innerHeight - yesButton.offsetHeight);
+      yesButton.style.position = 'absolute';
+      yesButton.style.left = `${x}px`;
+      yesButton.style.top = `${y}px`;
     }
   </script>
 </body>
