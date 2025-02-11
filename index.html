@@ -179,22 +179,19 @@
     let currentSongIndex = 0;
 
     const qnaData = [
-      { question: "What is my favorite color?", choices: ["Grey", "Blue", "Red", "Green"], answer: "Pink", prize: "câu 2 ;)" },
-      { question: "Where did we first meet?", choices: ["At the park", "At the mall", "At the cinema", "At the cafe"], answer: "At the park", prize: "*Ờmmm* câu 3 đi chứ còn gì nữa." },
-      { question: "What is my middle name?", choices: ["Marie", "Anne", "Grace", "Lynn"], answer: "Marie", prize: " biết thêm về tao(nếu muốn), next câu đi..." },
-      { question: "What is my favorite movie?", choices: ["Titanic", "Inception", "Avatar", "The Notebook"], answer: "Titanic", prize: " thấy tao mỗi ngày, thích thì nhích câu 5 đi" },
-      { question: "What is my favorite food?", choices: ["Pizza", "Sushi", "Burger", "Pasta"], answer: "Pizza", prize: " nói chuyện với tao mỗi khi mày muốn, thấy keng rồi thì chuyển câu 6 đê. " },
-      { question: "What is our anniversary date?", choices: ["February 14", "March 1", "April 22", "June 30"], answer: "February 14", prize: " tao làm phiền mỗi ngày, nhiễu rồi đâyyyy." },
-      { question: "What is my pet's name?", choices: ["Buddy", "Max", "Charlie", "Bella"], answer: "Buddy", prize: "c-cái đó á, thêm câu nữa đi bật mí cho ;)" },
-      { question: "What is my favorite hobby?", choices: ["Reading", "Painting", "Traveling", "Cooking"], answer: "Reading", prize: "người quan tâm bạn hơn bình thường, hơn nữa là..." },
-      { question: "What is my dream destination?", choices: ["Paris", "New York", "Tokyo", "Sydney"], answer: "Paris", prize: "..." }
+      { question: "Tao thích màu gì?", choices: ["Xám", "#ffd1dc", "Đỏ", "Xanh dương"], answer: "#ffd1dc", prize: "câu 2 ;)" },
+      { question: "Tao nói rằng tao có mấy nhân cách?", choices: ["3", "1", "2", "9"], answer: "2", prize: "*Ờmmm* câu 3 đi chứ còn gì nữa." },
+      { question: "Tại sao tao lại vô tâm?", choices: ["lười", "lườii nhưng mà có 2 chữ i", "lu...(quá lười để viết hết chữ 'lười')", ""], answer: "", prize: " biết thêm về tao(nếu muốn), next câu đi..." },
+      { question: "Có nhớ là tao nói rằng tao từng ấn tượng ở mày điều gì không?", choices: ["mày xinh", "trông không dễ đoán như mọi người nghĩ", "vì tao thích", "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa"], answer: "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa", prize: " thấy tao mỗi ngày, thích thì nhích câu 5 đi" },
+      { question: "Tao từng bảo tao ghét ăn gì?", choices: ["nước mắm nhà Niêm", "bún (y)", "mày", "*lười quá cho viết tạm như này nha*"], answer: "bún (y)", prize: " nói chuyện với tao mỗi khi mày muốn, thấy keng rồi thì chuyển câu 6 đê. " },
+      { question: "Đố nhớ tao làm website này ở nhân cách nào?", choices: ["hâm", "đang hâm", "từng hâm", "sắp hâm"], answer: "hâm", prize: " tao làm phiền mỗi ngày, nhiễu rồi đâyyyy." },
+      { question: "Đoán xem tao đang nghĩ gì khi gửi cho mày cái này?", choices: ["mong nó hiểu mấy cái mình viết trong lày", "ngủ", "tháo não", "nhớ cô ấy(không biết phải mày không)"], answer: "nhớ cô ấy(không biết phải mày không)", prize: "c-cái đó á, thêm câu nữa đi bật mí cho ;)" },
+      { question: "Sở thích của tao(khó: tỉ lệ đoán trúng chỉ có 25%)?", choices: ["một mình", "một mình nhưng bên 1 người nữa(ai ấy nhỉ)", "thích gì cũng được miễn hết chán", "lười nên đéo thích làm gì hết (y)"], answer: "lười nên đéo thích làm gì hết (y)", prize: "người quan tâm bạn hơn bình thường, hơn nữa là..." },
+      { question: "(Câu này để trống đợi người đó viết tiếp)?", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "đừng viết 4 cái không khó lắmmm"], answer: "...", prize: "..." }
     ];
 
-    const wrongAnswers = [
-      "Ôi, nhớ gì đâu...",
-      "...sai zoi",
-      "Thật luôn, có chắc là nhớ không zay",
-      "Thử thêm lần nữa có khi đúng đó"
+    const wrongAnswerMessages = [
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"
     ];
 
     question.addEventListener('mouseover', () => {
@@ -205,7 +202,7 @@
     });
 
     question.addEventListener('click', () => {
-      showAnnouncement('Nghĩ gì vậy trời, vui thôi đừng vui quá nha.');
+      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
     });
 
     function showImage(imageSrc) {
@@ -215,7 +212,7 @@
     }
 
     function acceptProposal() {
-      showAnnouncement('Nói thế thôi, chứ mà cho à 🥱');
+      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
     }
 
     function declineProposal() {
@@ -246,8 +243,8 @@
 
       const qna = qnaData[currentQuestionIndex];
       questionContainer.innerHTML = `<strong>Q${currentQuestionIndex + 1}:</strong> ${qna.question} <br>` +
-                                    qna.choices.map(choice => 
-                                      `<input type="radio" name="q${currentQuestionIndex}" value="${choice}"> ${choice}<br>`
+                                    qna.choices.map((choice, index) => 
+                                      `<input type="radio" name="q${currentQuestionIndex}" value="${choice}" data-wrong-message="${wrongAnswerMessages[currentQuestionIndex * 3 + index]}"> ${choice}<br>`
                                     ).join('') +
                                     `<button onclick="checkAnswer()">Submit</button>`;
     }
@@ -258,9 +255,9 @@
         showAnnouncement(`Correct! You win: ${qnaData[currentQuestionIndex].prize}`);
         currentQuestionIndex++;
         showNextQuestion();
-      } else {
-        const randomIndex = Math.floor(Math.random() * wrongAnswers.length);
-        showAnnouncement(wrongAnswers[randomIndex]);
+      } else if (selectedAnswer) {
+        const wrongMessage = selectedAnswer.getAttribute('data-wrong-message');
+        showAnnouncement(wrongMessage);
       }
     }
 
