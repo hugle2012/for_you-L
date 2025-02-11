@@ -82,6 +82,18 @@
       width: 100%;
       margin-top: 10px;
     }
+    #announcement {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: none;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
@@ -115,6 +127,8 @@
     <button onclick="changeMusic('song4.mp3')">Song 4</button>
   </div>
 
+  <div id="announcement"></div>
+
   <script>
     const question = document.getElementById('funnyQuestion');
     const yesButton = document.getElementById('yesButton');
@@ -122,6 +136,7 @@
     const questionContainer = document.getElementById('questionContainer');
     const startGameButton = document.getElementById('startGameButton');
     const backgroundMusic = document.getElementById('backgroundMusic');
+    const announcement = document.getElementById('announcement');
     let yesButtonSize = 20;
     let currentQuestionIndex = 0;
 
@@ -145,7 +160,7 @@
     });
 
     question.addEventListener('click', () => {
-      alert('Yay! I knew you\'d say yes! ❤️');
+      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
     });
 
     function showImage(imageSrc) {
@@ -155,7 +170,7 @@
     }
 
     function acceptProposal() {
-      alert('Yay! I knew you\'d say yes! ❤️');
+      showAnnouncement('Yay! I knew you\'d say yes! ❤️');
     }
 
     function declineProposal() {
@@ -177,7 +192,7 @@
 
     function showNextQuestion() {
       if (currentQuestionIndex >= qnaData.length) {
-        alert("Congratulations! You've answered all the questions!");
+        showAnnouncement("Congratulations! You've answered all the questions!");
         return;
       }
 
@@ -192,17 +207,25 @@
     function checkAnswer() {
       const selectedAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
       if (selectedAnswer && selectedAnswer.value === qnaData[currentQuestionIndex].answer) {
-        alert(`Correct! You win: ${qnaData[currentQuestionIndex].prize}`);
+        showAnnouncement(`Correct! You win: ${qnaData[currentQuestionIndex].prize}`);
         currentQuestionIndex++;
         showNextQuestion();
       } else {
-        alert('Oops! That\'s not correct. Try again!');
+        showAnnouncement('Oops! That\'s not correct. Try again!');
       }
     }
 
     function changeMusic(song) {
       backgroundMusic.src = song;
       backgroundMusic.play();
+    }
+
+    function showAnnouncement(message) {
+      announcement.textContent = message;
+      announcement.style.display = 'block';
+      setTimeout(() => {
+        announcement.style.display = 'none';
+      }, 3000);
     }
   </script>
 </body>
