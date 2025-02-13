@@ -1,35 +1,61 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    let currentQuestion = 1;
+    let correctAnswers = 0;
+    const totalQuestions = 3;
+    const correctAnswersKey = {
+        1: 'C',
+        2: 'C',
+        3: 'A'
+    };
+
     const quizForm = document.getElementById('quizForm');
     const modal = document.getElementById('modal');
     const closeButton = document.querySelector('.close-button');
-    const yesButton = document.getElementById('yes');
-    const noButton = document.getElementById('no');
-    let currentSlideIndex = 0;
+    const retryButton = document.getElementById('retry');
+    const continueButton = document.getElementById('continue');
     const slides = document.getElementsByClassName('slide');
 
     // Show the initial slide
+    let currentSlideIndex = 0;
     showSlides(currentSlideIndex);
 
-    quizForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const answers = Array.from(quizForm.querySelectorAll('input[type="radio"]:checked'));
-        if (answers.length === 3) {
-            modal.style.display = 'block';
-        } else {
-            alert('Please answer all questions.');
-        }
+    document.querySelectorAll('.submit-answer').forEach(button => {
+        button.addEventListener('click', function() {
+            const selectedOption = document.querySelector(`#question${currentQuestion} .option.selected`);
+            if (selectedOption) {
+                if (selectedOption.getAttribute('data-answer') === correctAnswersKey[currentQuestion]) {
+                    correctAnswers++;
+                }
+                if (currentQuestion < totalQuestions) {
+                    document.getElementById(`question${currentQuestion}`).style.display = 'none';
+                    currentQuestion++;
+                    document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                } else {
+                    showQuizResult();
+                }
+            } else {
+                alert('Please select an answer');
+            }
+        });
+    });
+
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll(`#question${currentQuestion} .option`).forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+        });
     });
 
     closeButton.addEventListener('click', function() {
         modal.style.display = 'none';
     });
 
-    yesButton.addEventListener('click', function() {
-        alert("Here's your secret code: (9)->10");
-        modal.style.display = 'none';
+    retryButton.addEventListener('click', function() {
+        retryQuiz();
     });
 
-    noButton.addEventListener('click', function() {
+    continueButton.addEventListener('click', function() {
+        alert("Here's your secret code: (9)->10");
         modal.style.display = 'none';
     });
 
@@ -75,5 +101,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function plusSlides(n) {
         showSlides(currentSlideIndex + n);
+    }
+
+    function showQuizResult() {
+        const resultText = `You got ${correctAnswers} out of ${totalQuestions} correct!`;
+        document.getElementById('quizResult').innerText = resultText;
+        modal.style.display = 'block';
+    }
+
+    function retryQuiz() {
+        currentQuestion = 1;
+        correctAnswers = 0;
+        document.getElementById('question1').style.display = 'block';
+        document.getElementById('question2').style.display = 'none';
+        document.getElementById('question3').style.display = 'none';
+        document.querySelectorAll('.option').forEach(option => option.classList.remove('selected'));
+        modal.style.display = 'none';
     }
 });
