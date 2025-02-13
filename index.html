@@ -47,7 +47,44 @@
             <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
             <button class="next" onclick="plusSlides(1)">&#10095;</button>
         </section>
-        <!-- The rest of your HTML content -->
+
+        <section id="quiz">
+            <h2>Take the Quiz</h2>
+            <form id="quizForm">
+                <div class="question" id="question1">
+                    <p>Question 1: What is your favorite color?</p>
+                    <div class="option" data-answer="A">A. Red</div>
+                    <div class="option" data-answer="B">B. Blue</div>
+                    <div class="option" data-answer="C">C. Pink</div>
+                    <div class="option" data-answer="D">D. Green</div>
+                </div>
+                <div class="question" id="question2" style="display:none;">
+                    <p>Question 2: What is your favorite movie genre?</p>
+                    <div class="option" data-answer="A">A. Action</div>
+                    <div class="option" data-answer="B">B. Comedy</div>
+                    <div class="option" data-answer="C">C. Romance</div>
+                    <div class="option" data-answer="D">D. Horror</div>
+                </div>
+                <div class="question" id="question3" style="display:none;">
+                    <p>Question 3: What is your favorite season?</p>
+                    <div class="option" data-answer="A">A. Spring</div>
+                    <div class="option" data-answer="B">B. Summer</div>
+                    <div class="option" data-answer="C">C. Autumn</div>
+                    <div class="option" data-answer="D">D. Winter</div>
+                </div>
+            </form>
+        </section>
+
+        <section id="music">
+            <h2>Background Music</h2>
+            <div class="music-controls">
+                <button id="prev">&#9664;</button>
+                <audio id="audioPlayer" controls>
+                    <source src="song1.mp3" type="audio/mp3">
+                </audio>
+                <button id="next">&#9654;</button>
+            </div>
+        </section>
     </main>
     <div id="modal" class="modal">
         <div class="modal-content">
