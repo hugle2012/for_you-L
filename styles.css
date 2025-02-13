@@ -44,8 +44,33 @@ section {
 }
 
 .slide img {
-    width: 100%;
+    width: 25%;
     border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.slide img:hover {
+    transform: scale(1.05);
+}
+
+.slide img:hover::after {
+    content: attr(alt);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    top: 10px;
+    left: 10px;
+}
+
+.slide p {
+    background-color: rgba(255, 153, 204, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 .prev, .next {
@@ -61,10 +86,16 @@ section {
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
+    z-index: 1;
 }
 
 .next {
     right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
     border-radius: 3px 0 0 3px;
 }
 
