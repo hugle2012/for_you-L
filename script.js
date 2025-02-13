@@ -4,10 +4,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const closeButton = document.querySelector('.close-button');
     const yesButton = document.getElementById('yes');
     const noButton = document.getElementById('no');
+    let currentSlideIndex = 0;
+    const slides = document.getElementsByClassName('slide');
+
+    // Show the initial slide
+    showSlides(currentSlideIndex);
 
     quizForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        modal.style.display = 'block';
+        const answers = Array.from(quizForm.querySelectorAll('input[type="radio"]:checked'));
+        if (answers.length === 3) {
+            modal.style.display = 'block';
+        } else {
+            alert('Please answer all questions.');
+        }
     });
 
     closeButton.addEventListener('click', function() {
@@ -38,4 +48,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
         audioPlayer.src = songs[currentSongIndex];
         audioPlayer.play();
     });
+
+    document.querySelector('.prev').addEventListener('click', function() {
+        plusSlides(-1);
+    });
+
+    document.querySelector('.next').addEventListener('click', function() {
+        plusSlides(1);
+    });
+
+    function showSlides(n) {
+        if (n >= slides.length) {
+            currentSlideIndex = 0;
+        } else if (n < 0) {
+            currentSlideIndex = slides.length - 1;
+        } else {
+            currentSlideIndex = n;
+        }
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slides[currentSlideIndex].style.display = "block";
+    }
+
+    function plusSlides(n) {
+        showSlides(currentSlideIndex + n);
+    }
 });
