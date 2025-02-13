@@ -1,299 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentine's Surprise</title>
-  <style>
-    body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
-      background: url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: red;
-    }
-    button {
-      background-color: #fc82de;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 10px;
-      transition: background-color 0.3s, transform 0.3s;
-    }
-    button:hover {
-      background-color: #ffb6c1;
-      transform: scale(1.1);
-    }
-    #funnyQuestion {
-      cursor: pointer;
-      color: purple;
-      font-size: 24px;
-    }
-    #cuteImage {
-      display: none;
-      width: 300px;
-      margin-top: 20px;
-    }
-    #yesButton {
-      background-color: #fc82de;
-    }
-    #noButton {
-      background-color: #fc82de;
-    }
-    #qnaGame {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    #qnaGame h3 {
-      margin-top: 0;
-    }
-    #qnaGame ul {
-      list-style: none;
-      padding: 0;
-    }
-    #qnaGame li {
-      margin-bottom: 10px;
-    }
-    #qnaGame button {
-      width: 100%;
-      margin-top: 10px;
-    }
-    #announcement {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      display: none;
-      font-size: 18px;
-    }
-    #popupGif {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      display: none;
-    }
-    #popupGif img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
-    #popupGif button {
-      width: 100px;
-      margin-top: 10px;
-    }
-    #popupGif p {
-      margin-top: 10px;
-    }
-    #explanation {
-      position: fixed;
-      bottom: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      display: none;
-      font-size: 18px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Cha biet nhu nao, <span id="crushName">[OKE]</span>!</h1>
+    <header>
+        <h1>Valentine's Day Special</h1>
+    </header>
+    <main>
+        <section id="gallery">
+            <!-- Placeholder for images with captions -->
+            <div class="image-container">
+                <img src="image1.jpg" alt="Image 1">
+                <p>Is this you when...</p>
+            </div>
+            <!-- Add more images as needed -->
+        </section>
+        
+        <section id="quiz">
+            <h2>Take the Quiz</h2>
+            <form id="quizForm">
+                <div class="question">
+                    <p>Question 1: What is your favorite color?</p>
+                    <label><input type="radio" name="q1" value="A"> A. Red</label>
+                    <label><input type="radio" name="q1" value="B"> B. Blue</label>
+                    <label><input type="radio" name="q1" value="C"> C. Pink</label>
+                    <label><input type="radio" name="q1" value="D"> D. Green</label>
+                </div>
+                <!-- Add more questions as needed -->
+                <button type="submit">Submit</button>
+            </form>
+        </section>
 
-  <audio id="backgroundMusic" autoplay loop>
-    <source src="mo.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <button onclick="showImage('image1.jpg')">Ấn đây đi..</button>
-  <button onclick="showImage('image2.jpg')">Không có gì ở đây đâu</button>
-
-  <img id="cuteImage" src="" alt="Cute Image">
-
-  <h2 id="funnyQuestion" style="position: absolute;">Will you be my Valentine?</h2>
-  <button id="yesButton" onclick="acceptProposal()">Yes</button>
-  <button id="noButton" onclick="declineProposal()">No</button>
-
-  <div id="qnaGame">
-    <h3>Mini Q&A Game</h3>
-    <div id="questionContainer"></div>
-    <button id="startGameButton" onclick="startQnAGame()">Start Game</button>
-  </div>
-
-  <div id="announcement"></div>
-  <div id="explanation"></div>
-
-  <div id="popupGif">
-    <img id="gifImg" src="" alt="GIF">
-    <p id="gifMessage"></p>
-    <button id="opt1Button" onclick="showNextGif('gif2.gif', 'Còn muốn biết thêm gì za?')">Opt 1</button>
-    <button id="opt2Button" onclick="showNextGif('gif3.gif', 'Tò mò à =)))?')">Opt 2</button>
-  </div>
-
-  <script>
-    const question = document.getElementById('funnyQuestion');
-    const yesButton = document.getElementById('yesButton');
-    const noButton = document.getElementById('noButton');
-    const questionContainer = document.getElementById('questionContainer');
-    const startGameButton = document.getElementById('startGameButton');
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const announcement = document.getElementById('announcement');
-    const explanation = document.getElementById('explanation');
-    const popupGif = document.getElementById('popupGif');
-    const gifImg = document.getElementById('gifImg');
-    const gifMessage = document.getElementById('gifMessage');
-    let yesButtonSize = 20;
-    let currentQuestionIndex = 0;
-    let isPlaying = true;
-    let explanationShown = false;
-    let noCount = 0;
-
-    const qnaData = [
-      { question: "Tao thích màu gì?", choices: ["Xám", "#ffd1dc", "Đỏ", "Xanh dương"], answer: "#ffd1dc", explanation: "có người thích nên bm thích theo" },
-      { question: "Tao nói rằng tao có mấy nhân cách?", choices: ["3", "1", "2", "9"], answer: "2", explanation: "kể từ hôm nào tự nhớ đê" },
-      { question: "Tại sao tao lại vô tâm?", choices: ["lười", "lườii nhưng mà có 2 chữ i", "lu...(quá lười để viết hết chữ 'lười')", ""], answer: "", explanation: "bm luoi, oce." },
-      { question: "Có nhớ là tao nói rằng tao từng ấn tượng ở mày điều gì không?", choices: ["mày xinh", "trông không dễ đoán như mọi người nghĩ", "vì tao thích", "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa"], answer: "chắc có mấy cái kia thôi chứ tao cũng chả bit bịa đáp án gì nựa", explanation: "đéo bit nữa, coi là vậy đi(biết thì biết)" },
-      { question: "Tao từng bảo tao ghét ăn gì?", choices: ["nước mắm nhà Niêm", "bún (y)", "mày", "*lười quá cho viết tạm như này nha*"], answer: "bún (y)", explanation: "Tao ghét ăn bún." },
-      { question: "Đố nhớ tao làm website này ở nhân cách nào?", choices: ["hâm", "đang hâm", "từng hâm", "sắp hâm"], answer: "hâm", explanation: "const = hâm" },
-      { question: "Đoán xem tao đang nghĩ gì khi gửi cho mày cái này?", choices: ["mong nó hiểu mấy cái mình viết trong lày", "ngủ", "tháo não", "nhớ cô ấy(không biết phải mày không)"], answer: "nhớ cô ấy(không biết phải mày không)", explanation: "Lúc nào cũng nhớ." },
-      { question: "Sở thích của tao(khó: tỉ lệ đoán trúng chỉ có 25%)?", choices: ["một mình", "một mình nhưng bên 1 người nữa(ai ấy nhỉ)", "thích gì cũng được miễn hết chán", "lười nên đéo thích làm gì hết (y)"], answer: "lười nên đéo thích làm gì hết (y)", explanation: "thich moi cai do thui" },
-      { question: "(Câu này để trống đợi người đó viết tiếp)", choices: ["đáp án số 1", "đáp án số 2(nhớ viết khó vào nhé)", "đáp án số 3(dễ tatchofat)", "..."], answer: "...", explanation: "viết tiếp đi..." }
-    ];
-
-    const wrongAnswerMessages = [
-      "Sai oi, tao la xam mah", "2", "do là qanh zoi", "Saiii", "1minh tao thi co don lam", "6", "khong phai", "ghet 2 chu i", "lai sai roi", "cung co phan dung nma chua du", "ai bao the ay nhii", "chac gi", "DCM THOI VKL", "14", "sai ro rang", "qua luoi de giai thich tai sao no sai", "dang", "tung", "saiii", "khong phai", "lai sai roai", "1minh vui nhung ma buon", "tuy luc thoai", "sai oii", "one", "two", "three"
-    ];
-
-    question.addEventListener('mouseover', () => {
-      const x = Math.random() * (window.innerWidth - question.offsetWidth);
-      const y = Math.random() * (window.innerHeight - question.offsetHeight);
-      question.style.left = `${x}px`;
-      question.style.top = `${y}px`;
-    });
-
-    question.addEventListener('click', () => {
-      showAnnouncement('Tao biết ngay mà haizzz');
-    });
-
-    function showImage(imageSrc) {
-      const imgElement = document.getElementById('cuteImage');
-      imgElement.src = imageSrc;
-      imgElement.style.display = 'block';
-    }
-
-    function acceptProposal() {
-      showAnnouncement('Mày nghĩ là tao cho chắc(có khi ai biết, khám phá hết website này đi 😉)');
-    }
-
-    function declineProposal() {
-      yesButtonSize += 10;
-      yesButton.style.padding = `${yesButtonSize}px`;
-      yesButton.style.transform = `scale(${yesButtonSize / 20})`;
-      const x = Math.random() * (window.innerWidth - yesButton.offsetWidth);
-      const y = Math.random() * (window.innerHeight - yesButton.offsetHeight);
-      yesButton.style.position = 'absolute';
-      yesButton.style.left = `${x}px`;
-      yesButton.style.top = `${y}px`;
-    }
-
-    function startQnAGame() {
-      startGameButton.style.display = 'none';
-      currentQuestionIndex = 0;
-      showNextQuestion();
-    }
-
-    function showNextQuestion() {
-      if (currentQuestionIndex >= qnaData.length) {
-        showAnnouncement("Giỏi rồi, trả lời như hiểu nhau lắm rồi, nhưng mà...");
-        setTimeout(() => {
-          showPopupGif('congrats.gif', "Mày có muốn biết suy nghĩ của anh ta(tao) về mày không? (VERY DANGEROUS)");
-        }, 3000);
-        return;
-      }
-
-      const qna = qnaData[currentQuestionIndex];
-      questionContainer.innerHTML = `<strong>Q${currentQuestionIndex + 1}:</strong> ${qna.question} <br>` +
-                                    qna.choices.map((choice, index) => 
-                                      `<input type="radio" name="q${currentQuestionIndex}" value="${choice}" data-wrong-message="${wrongAnswerMessages[currentQuestionIndex * 3 + index]}"> ${choice}<br>`
-                                    ).join('') +
-                                    `<button onclick="checkAnswer()">Submit</button>`;
-    }
-
-    function checkAnswer() {
-      const selectedAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
-      if (selectedAnswer && selectedAnswer.value === qnaData[currentQuestionIndex].answer) {
-        showAnnouncement(`Gòi mày đúng gòi🥱`);
-        showExplanation(qnaData[currentQuestionIndex].explanation);
-      } else if (selectedAnswer) {
-        const wrongMessage = selectedAnswer.getAttribute('data-wrong-message');
-        showAnnouncement(wrongMessage);
-      }
-    }
-
-    function showExplanation(explanationText) {
-      explanation.innerHTML = `Mày có muốn biết tại sao câu đó lại có đáp án vậy khônggggg?<br><button onclick="confirmExplanation('${explanationText}')">Có</button> <button onclick="denyExplanation()">Không</button>`;
-      explanation.style.display = 'block';
-    }
-
-    function confirmExplanation(explanationText) {
-      explanation.innerHTML = explanationText;
-      setTimeout(() => {
-        explanation.style.display = 'none';
-        currentQuestionIndex++;
-        showNextQuestion();
-      }, 3000);
-    }
-
-    function denyExplanation() {
-      noCount++;
-      if (noCount > 2) {
-        explanation.innerHTML = "Mày phải biết mới cho đi tiếp cơ Ơ";
-        setTimeout(() => {
-          noCount = 0;
-          confirmExplanation(qnaData[currentQuestionIndex].explanation);
-        }, 3000);
-      } else {
-        explanation.innerHTML = "Mày muốn biết mà phải không";
-        setTimeout(showExplanation.bind(null, qnaData[currentQuestionIndex].explanation), 3000);
-      }
-    }
-
-    function showAnnouncement(message) {
-      announcement.textContent = message;
-      announcement.style.display = 'block';
-      setTimeout(() => {
-        announcement.style.display = 'none';
-      }, 3000);
-    }
-
-    function showPopupGif(gifSrc, message) {
-      gifImg.src = gifSrc;
-      gifMessage.textContent = message;
-      popupGif.style.display = 'block';
-    }
-
-    function showNextGif(gifSrc, message) {
-      gifImg.src = gifSrc;
-      gifMessage.textContent = message;
-    }
-  </script>
+        <section id="music">
+            <h2>Background Music</h2>
+            <div class="music-controls">
+                <button id="prev">&#9664;</button>
+                <audio id="audioPlayer" controls>
+                    <source src="song1.mp3" type="audio/mp3">
+                </audio>
+                <button id="next">&#9654;</button>
+            </div>
+        </section>
+    </main>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p>Would you like to continue to a secret reward?</p>
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
