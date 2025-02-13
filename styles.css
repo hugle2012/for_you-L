@@ -2,7 +2,6 @@
     font-family: 'Brillant';
     src: url('brillant.otf') format('opentype');
 }
-
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(to right, #ffcccc, #ff99cc);
