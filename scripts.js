@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let correctAnswers = 0;
     const totalQuestions = 3;
     const correctAnswersKey = {
-        1: 'B',
-        2: 'D',
-        3: 'C'
+        1: 'C',
+        2: 'B',
+        3: 'A'
     };
 
     const quizForm = document.getElementById('quizForm');
