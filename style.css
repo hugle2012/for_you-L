@@ -16,6 +16,7 @@ h1 {
     font-size: 2.5em;
     color: #fff;
     font-family: 'Brush Script MT', cursive;
+    margin: 0;
 }
 
 main {
@@ -26,21 +27,52 @@ section {
     margin: 2em 0;
 }
 
-.image-container {
-    display: inline-block;
-    margin: 1em;
+.slideshow-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
 }
 
-.image-container img {
-    width: 150px;
-    height: 150px;
+.slide {
+    display: none;
+    text-align: center;
+}
+
+.slide img {
+    width: 100%;
     border-radius: 10px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
 }
 
 #quiz {
     background-color: #ffe6f2;
     padding: 1em;
     border-radius: 10px;
+    display: inline-block;
+    text-align: left;
 }
 
 #quizForm .question {
@@ -59,6 +91,7 @@ button {
     padding: 0.5em 1em;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -74,6 +107,16 @@ button:hover {
 .music-controls button {
     font-size: 1.5em;
     margin: 0 1em;
+    background-color: #ff66b2;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.music-controls button:hover {
+    background-color: #cc0052;
 }
 
 .modal {
