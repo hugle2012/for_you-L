@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById('modal');
     const closeButton = document.querySelector('.close-button');
     const retryButton = document.getElementById('retry');
-    const continueButton = document.getElementById('continue');
     const slides = document.getElementsByClassName('slide');
 
     // Show the initial slide
@@ -33,11 +32,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     retryButton.addEventListener('click', function() {
         retryQuiz();
-    });
-
-    continueButton.addEventListener('click', function() {
-        alert("Here's your secret code: (9)->10");
-        modal.style.display = 'none';
     });
 
     const audioPlayer = document.getElementById('audioPlayer');
@@ -100,6 +94,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function showQuizResult() {
         const resultText = `You got ${correctAnswers} out of ${totalQuestions} correct!`;
         document.getElementById('quizResult').innerText = resultText;
+        if (correctAnswers === totalQuestions) {
+            document.getElementById('quizResult').innerText += "\nHere's your secret code: (9)->10";
+        }
         modal.style.display = 'block';
     }
 
