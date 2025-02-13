@@ -5,7 +5,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #ffcccc, #ff99cc);
+    background: linear-gradient(to bottom, #ff99cc, #ff6699);
     color: #333;
     text-align: center;
     margin: 0;
@@ -13,13 +13,15 @@ body {
 }
 
 header {
-    background-color: #ff99cc;
+    background: url('header_background.jpg') no-repeat center center;
+    background-size: cover;
     padding: 1em;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
     font-size: 2.5em;
-    color: #fff;
     font-family: 'Brillant', cursive;
     margin: 0;
 }
@@ -44,7 +46,7 @@ section {
 }
 
 .slide img {
-    width: 25%;
+    width: 50%;
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
@@ -64,13 +66,21 @@ section {
     left: 10px;
 }
 
-.slide p {
+.caption {
+    font-family: 'Brillant', cursive;
     background-color: rgba(255, 153, 204, 0.8);
     padding: 10px;
     border-radius: 5px;
     color: #fff;
     display: inline-block;
     margin-top: 10px;
+}
+
+.small-caption {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 5px;
 }
 
 .prev, .next {
