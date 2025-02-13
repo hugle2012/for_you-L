@@ -93,19 +93,6 @@ section {
     margin-bottom: 5px;
 }
 
-.scroll-down {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2em 0;
-    color: #fff;
-}
-
-.scroll-down .arrow {
-    font-size: 2em;
-    margin: 0 1em;
-}
-
 .prev, .next {
     cursor: pointer;
     position: absolute;
