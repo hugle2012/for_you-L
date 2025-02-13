@@ -31,28 +31,30 @@
         <section id="quiz">
             <h2>Take the Quiz</h2>
             <form id="quizForm">
-                <div class="question">
+                <div class="question" id="question1">
                     <p>Question 1: What is your favorite color?</p>
-                    <label><input type="radio" name="q1" value="A"> A. Red</label>
-                    <label><input type="radio" name="q1" value="B"> B. Blue</label>
-                    <label><input type="radio" name="q1" value="C"> C. Pink</label>
-                    <label><input type="radio" name="q1" value="D"> D. Green</label>
+                    <div class="option" data-answer="A">A. Red</div>
+                    <div class="option" data-answer="B">B. Blue</div>
+                    <div class="option" data-answer="C">C. Pink</div>
+                    <div class="option" data-answer="D">D. Green</div>
+                    <button type="button" class="submit-answer">Submit Answer</button>
                 </div>
-                <div class="question">
+                <div class="question" id="question2" style="display:none;">
                     <p>Question 2: What is your favorite movie genre?</p>
-                    <label><input type="radio" name="q2" value="A"> A. Action</label>
-                    <label><input type="radio" name="q2" value="B"> B. Comedy</label>
-                    <label><input type="radio" name="q2" value="C"> C. Romance</label>
-                    <label><input type="radio" name="q2" value="D"> D. Horror</label>
+                    <div class="option" data-answer="A">A. Action</div>
+                    <div class="option" data-answer="B">B. Comedy</div>
+                    <div class="option" data-answer="C">C. Romance</div>
+                    <div class="option" data-answer="D">D. Horror</div>
+                    <button type="button" class="submit-answer">Submit Answer</button>
                 </div>
-                <div class="question">
+                <div class="question" id="question3" style="display:none;">
                     <p>Question 3: What is your favorite season?</p>
-                    <label><input type="radio" name="q3" value="A"> A. Spring</label>
-                    <label><input type="radio" name="q3" value="B"> B. Summer</label>
-                    <label><input type="radio" name="q3" value="C"> C. Autumn</label>
-                    <label><input type="radio" name="q3" value="D"> D. Winter</label>
+                    <div class="option" data-answer="A">A. Spring</div>
+                    <div class="option" data-answer="B">B. Summer</div>
+                    <div class="option" data-answer="C">C. Autumn</div>
+                    <div class="option" data-answer="D">D. Winter</div>
+                    <button type="button" class="submit-answer">Submit Answer</button>
                 </div>
-                <button type="submit">Submit</button>
             </form>
         </section>
 
@@ -70,9 +72,9 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <p>Would you like to continue to a secret reward?</p>
-            <button id="yes">Yes</button>
-            <button id="no">No</button>
+            <p id="quizResult"></p>
+            <button id="retry">Retry Quiz</button>
+            <button id="continue">Continue to Secret Code</button>
         </div>
     </div>
     <script src="scripts.js"></script>
