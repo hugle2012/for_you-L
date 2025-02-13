@@ -90,7 +90,7 @@ section {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.option:hover {
+.option:hover, .option.selected {
     background-color: #ff66b2;
     color: #fff;
 }
