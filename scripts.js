@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
         modal.style.display = 'block';
     }
-
     function retryQuiz() {
         currentQuestion = 1;
         correctAnswers = 0;
