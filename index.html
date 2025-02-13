@@ -12,12 +12,20 @@
     </header>
     <main>
         <section id="gallery">
-            <!-- Placeholder for images with captions -->
-            <div class="image-container">
-                <img src="image1.jpg" alt="Image 1">
-                <p>Is this you when...</p>
+            <div class="slideshow-container">
+                <!-- Placeholder for images with captions -->
+                <div class="slide">
+                    <img src="image1.jpg" alt="Image 1">
+                    <p>Is this you when...</p>
+                </div>
+                <div class="slide">
+                    <img src="image2.jpg" alt="Image 2">
+                    <p>I hope this is you every time you see...</p>
+                </div>
+                <!-- Add more slides as needed -->
+                <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+                <button class="next" onclick="plusSlides(1)">&#10095;</button>
             </div>
-            <!-- Add more images as needed -->
         </section>
         
         <section id="quiz">
@@ -30,7 +38,20 @@
                     <label><input type="radio" name="q1" value="C"> C. Pink</label>
                     <label><input type="radio" name="q1" value="D"> D. Green</label>
                 </div>
-                <!-- Add more questions as needed -->
+                <div class="question">
+                    <p>Question 2: What is your favorite movie genre?</p>
+                    <label><input type="radio" name="q2" value="A"> A. Action</label>
+                    <label><input type="radio" name="q2" value="B"> B. Comedy</label>
+                    <label><input type="radio" name="q2" value="C"> C. Romance</label>
+                    <label><input type="radio" name="q2" value="D"> D. Horror</label>
+                </div>
+                <div class="question">
+                    <p>Question 3: What is your favorite season?</p>
+                    <label><input type="radio" name="q3" value="A"> A. Spring</label>
+                    <label><input type="radio" name="q3" value="B"> B. Summer</label>
+                    <label><input type="radio" name="q3" value="C"> C. Autumn</label>
+                    <label><input type="radio" name="q3" value="D"> D. Winter</label>
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </section>
