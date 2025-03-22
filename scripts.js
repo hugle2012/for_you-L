@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const resultText = `You got ${correctAnswers} out of ${totalQuestions} correct!`;
         document.getElementById('quizResult').innerText = resultText;
         if (correctAnswers === totalQuestions) {
-            document.getElementById('quizResult').innerText += "\nHere's your secret code: (9)->10";
+            document.getElementById('quizResult').innerText += "\nEm sieu quaaaaa, tang em 1 ve di choi voi anh ngay mai nhe <33333";
         }
         modal.style.display = 'block';
     }
